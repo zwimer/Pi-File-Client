@@ -1,13 +1,14 @@
 #include "MainWindow.hpp"
 #include "ui_mainwindow.h"
+#include "Console.hpp"
 #include "main.hpp"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
 //Constructor
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow) { RUN_ONCE
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), 
+    ui(new Ui::MainWindow), con(new Console(parent)) { RUN_ONCE
 
     //Set up the ui
     ui->setupUi(this);
@@ -33,12 +34,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Add the text interface and split
     //widget made above to the main splitter
-    main->addWidget(ui->plainTextEdit);
+    main->addWidget(con);
+    //main->addWidget(ui->plainTextEdit);
     main->addWidget(subC);
 
     //Make this centralWidget's layout
     layout->addWidget(main);
     ui->centralWidget->setLayout(layout);
+
+
+
+    con->setObjectName(QStringLiteral("QplainTextEdit"));
+    con->setGeometry(QRect(10, 10, 361, 481));
 }
 
 //Destructor
