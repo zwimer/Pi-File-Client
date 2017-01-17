@@ -8,47 +8,45 @@
 
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), 
-    ui(new Ui::MainWindow), con(new Console(parent)) { RUN_ONCE
+	ui(new Ui::MainWindow), con(new Console(parent)) { RUN_ONCE
 
-    //Set up the ui
-    ui->setupUi(this);
+	//Set up the ui
+	ui->setupUi(this);
 
-    //Define local variables
-    QWidget * subC = new QWidget(ui->centralWidget);
-    QSplitter * subS = new QSplitter(ui->centralWidget);
-    QSplitter * main = new QSplitter(ui->centralWidget);
-    QVBoxLayout * subL = new QVBoxLayout(ui->centralWidget);
-    QHBoxLayout * layout = new QHBoxLayout(ui->centralWidget);
+	//Initalize the console
+	con->setObjectName(QStringLiteral("QplainTextEdit"));
+	con->setGeometry(QRect(10, 10, 361, 481));
 
-    //Define orientations
-    subS->setOrientation(Qt::Vertical);
-    main->setOrientation(Qt::Horizontal);
+	//Define local variables
+	QVBoxLayout * subL = new QVBoxLayout;
+	QHBoxLayout * layout = new QHBoxLayout;
+	QWidget * subC = new QWidget(ui->centralWidget);
+	QSplitter * subS = new QSplitter(ui->centralWidget);
+	QSplitter * main = new QSplitter(ui->centralWidget);
 
-    //Add lists to the right splitter
-    subS->addWidget(ui->listWidget);
-    subS->addWidget(ui->listWidget_2);
+	//Define orientations
+	subS->setOrientation(Qt::Vertical);
+	main->setOrientation(Qt::Horizontal);
 
-    //Put the splitter into a widget
-    subL->addWidget(subS);
-    subC->setLayout(subL);
+	//Add lists to the right splitter
+	subS->addWidget(ui->listWidget);
+	subS->addWidget(ui->listWidget_2);
 
-    //Add the text interface and split
-    //widget made above to the main splitter
-    main->addWidget(con);
-    //main->addWidget(ui->plainTextEdit);
-    main->addWidget(subC);
+	//Put the splitter into a widget
+	subL->addWidget(subS);
+	subC->setLayout(subL);
 
-    //Make this centralWidget's layout
-    layout->addWidget(main);
-    ui->centralWidget->setLayout(layout);
+	//Add the text interface and split
+	//widget made above to the main splitter
+	main->addWidget(con);
+	main->addWidget(subC);
 
-
-
-    con->setObjectName(QStringLiteral("QplainTextEdit"));
-    con->setGeometry(QRect(10, 10, 361, 481));
+	//Make this centralWidget's layout
+	layout->addWidget(main);
+	ui->centralWidget->setLayout(layout);
 }
 
 //Destructor
-MainWindow::~MainWindow() {
-    delete ui;
+MainWindow::~MainWindow() { RUN_ONCE
+	delete ui;
 }

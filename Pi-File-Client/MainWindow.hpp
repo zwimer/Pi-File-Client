@@ -10,24 +10,24 @@ class Console;
 
 //Auto-generated
 namespace Ui {
-    class MainWindow;
+	class MainWindow;
 }
 
 //The main window
 class MainWindow : public QMainWindow{
-    Q_OBJECT
+	Q_OBJECT
 public:
 
 	//Constructor: prevent implicit conversion
-    explicit MainWindow(QWidget *parent = 0);
+	explicit MainWindow(QWidget *parent = 0);
 
 	//Destructor
-    ~MainWindow();
+	~MainWindow();
 
 private:
 
 	//Representation
-    Ui::MainWindow *ui;
+	Ui::MainWindow *ui;
 	Console * con;
 
 };

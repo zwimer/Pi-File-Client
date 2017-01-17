@@ -8,15 +8,15 @@
 //A class that transforms a
 //QPlainTextEdit into a console
 class Console : public QPlainTextEdit {
-    Q_OBJECT
+	Q_OBJECT
 public:
 
 	//Constructor
-    Console()=delete;
-    Console(QWidget * parent);
+	Console()=delete;
+	Console(QWidget * parent);
 	
 	//Destructor
-    ~Console();
+	~Console();
 
 public slots:
 	
@@ -27,7 +27,6 @@ private:
 
 	//Representation
 	int numImmutable;
-
 };
-
 #endif
+
