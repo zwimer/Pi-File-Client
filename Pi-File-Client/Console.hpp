@@ -4,6 +4,7 @@
 #include "main.hpp"
 
 #include <QPlainTextEdit>
+#include <QStringRef>
 
 //A class that transforms a
 //QPlainTextEdit into a console
@@ -18,18 +19,21 @@ public:
 	//Destructor
 	~Console();
 
-public slots:
+private slots:
 	
 	//Turn on or off read only mode as needed
-	void toggleReadOnlyEdit();
+    void textChangedSlot();
 
 private:
 
-    //If the immutable part was changed, fix it
-    void fixImmutablePart();
+     //If the immutable part was changed, fix it
+    void fixImmutableText();
 
-	//Representation
-    QString immutablePart;
+    //Process a line of input
+    void processCommand(const QStringRef& s);
+
+    //The immutable text of the console
+    QString imT;
 
     //Prepend to each line
     static const QString prep;
