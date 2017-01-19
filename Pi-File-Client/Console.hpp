@@ -25,8 +25,14 @@ public slots:
 
 private:
 
+    //If the immutable part was changed, fix it
+    void fixImmutablePart();
+
 	//Representation
-	int numImmutable;
+    QString immutablePart;
+
+    //Prepend to each line
+    static const QString prep;
 };
 #endif
 
