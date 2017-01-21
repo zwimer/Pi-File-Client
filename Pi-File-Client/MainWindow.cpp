@@ -50,3 +50,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 MainWindow::~MainWindow() { RUN_ONCE
 	delete ui;
 }
+
+
+void MainWindow::processCommand(const QStringRef& s) {
+
+
+    //TODO
+
+}

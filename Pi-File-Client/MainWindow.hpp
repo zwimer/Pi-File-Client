@@ -26,7 +26,13 @@ public:
 
 private:
 
-	//Representation
+     //If the immutable part was changed, fix it
+    void fixImmutableText();
+
+    //Process a command
+    void processCommand(const QStringRef& s);
+
+    //Representation
 	Ui::MainWindow *ui;
 	Console * con;
 

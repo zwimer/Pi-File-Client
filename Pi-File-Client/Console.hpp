@@ -29,9 +29,6 @@ private:
      //If the immutable part was changed, fix it
     void fixImmutableText();
 
-    //Process a line of input
-    void processCommand(const QStringRef& s);
-
     //The immutable text of the console
     QString imT;
 

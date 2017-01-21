@@ -5,7 +5,8 @@
 const QString Console::prep = tr("> ");
 
 //Constructor
-Console::Console(QWidget * parent) : QPlainTextEdit(parent) {
+Console::Console(QWidget * parent) :
+	QPlainTextEdit(parent) { RUN_ONCE
 
     //Initalize the text
     setPlainText(imT = prep);
@@ -16,7 +17,9 @@ Console::Console(QWidget * parent) : QPlainTextEdit(parent) {
 }
 
 //Destructor
-Console::~Console() {}
+Console::~Console() {
+	RUN_ONCE
+}
 
 
 //Make top part of console read-only if needed
@@ -38,7 +41,7 @@ void Console::textChangedSlot() {
     imT.append(ins);
 
     //Process the command ins
-    processCommand(ins);
+//    processCommand(ins);							 TODO: CHANGE
 
     //Add prep to the new line, and make it immutable
     s.insert(i+1, prep);
@@ -85,9 +88,3 @@ void Console::fixImmutableText() {
     setTextCursor(tmpC);
 }
 
-void Console::processCommand(const QStringRef& s) {
-
-
-    //TODO
-
-}
