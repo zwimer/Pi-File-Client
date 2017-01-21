@@ -4,34 +4,48 @@
 #include <string>
 #include <map>
 
-#include <iostream> //TODO DELETE
 //-------------------------For the user-------------------------
 
 
 //Call this inside a command
 //constructor to make it usable
-#define ADD_COMMAND(T)								\
-namespace CommandNamespace {						\
-	static RegisterCommand<class T> reg##T(#T);		\
+#define ADD_COMMAND(T)                              \
+namespace CommandNamespace {                        \
+    static RegisterCommand<class T> reg##T(#T);     \
 }
 
 
 //----------------------For CommandHandler----------------------
 
 
-//Declare the namespace
-//namespace CommandFunctionNamespace {};
+//For clarity
+typedef void (*execType) (const std::string&);
 
-//TODO condense this into one line
-//TODO remove this right in CommandMap::m, no need for execType
-extern void (*a)(const std::string&);
-typedef decltype(a) execType;
+//A class used to create a primative tree
+struct Node {
+
+	//Constructor
+	Node() = delete;
+	Node(const std::string, execType, Node*);
+
+	//Representation
+	const std::string key;
+	execType value;
+	Node * next;
+};
 
 //Protect the global namespace
 namespace CommandMap {
 
 	//The map that links command names to their execution functions
 	extern std::map<std::string, execType> m;
+
+	//Has zero initialization (before static initalization)
+	//m is build using the data stored in this
+	extern Node * compileTimeM;
+
+	//A function called once to build m
+	void buildMap();
 };
 
 
@@ -72,8 +86,7 @@ public:
 		               "T doesn't contain a public static function named execute" );
 
 		//Register the command
-		std::cout << "m = " << CommandMap::m.size() << std::endl;//TODO Delete this
-		CommandMap::m[s] = &T::execute;
+		CommandMap::compileTimeM = new Node(s, &T::execute, CommandMap::compileTimeM);
 	}
 };
 

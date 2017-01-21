@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include "Command.hpp"
 #include "main.hpp"
 
 #include <QApplication>
@@ -16,6 +17,9 @@ void Assert(bool b, const char *s) { if (!b) Err(s); }
 
 //The main function
 int main(int argc, char *argv[]) {
+
+	//Build the map
+	CommandMap::buildMap();
 
 	//Make the application
 	QApplication a(argc, argv);

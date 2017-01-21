@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    Console.cpp
+    Console.cpp \
+    Command.cpp
 
 HEADERS  += MainWindow.hpp \
     main.hpp \
-    Console.hpp
+    Console.hpp \
+    Command.hpp
 
 FORMS    += mainwindow.ui
