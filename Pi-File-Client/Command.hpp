@@ -7,8 +7,8 @@
 //-------------------------For the user-------------------------
 
 
-//Call this inside a command
-//constructor to make it usable
+//Call this inside a command's cpp file
+//to register the command as a usable command
 #define ADD_COMMAND(T)                              \
 namespace CommandNamespace {                        \
     static RegisterCommand<class T> reg##T(#T);     \
@@ -37,12 +37,23 @@ struct Node {
 //Protect the global namespace
 namespace CommandMap {
 
+	/* The reason staticBuiltM exists instead of just having
+	 * m be built statically is because m must be initalized
+	 * with a constructor, which occurs in the dynamic phase
+	 * of non-local variable initalization. This means it's
+	 * construction occurs at the same time it's population
+	 * does. Since elements of this phase are created in an
+	 * arbiturary order, it is possible an element may be 
+	 * added to m before m is constructed. Thus we used
+	 * staticBuiltM which is initalized earlier and build
+	 * m from that early on in main.cpp */
+
 	//The map that links command names to their execution functions
 	extern std::map<std::string, execType> m;
 
 	//Has zero initialization (before static initalization)
 	//m is build using the data stored in this
-	extern Node * compileTimeM;
+	extern Node * staticBuiltM;
 
 	//A function called once to build m
 	void buildMap();
@@ -86,7 +97,7 @@ public:
 		               "T doesn't contain a public static function named execute" );
 
 		//Register the command
-		CommandMap::compileTimeM = new Node(s, &T::execute, CommandMap::compileTimeM);
+		CommandMap::staticBuiltM = new Node(s, &T::execute, CommandMap::staticBuiltM);
 	}
 };
 
