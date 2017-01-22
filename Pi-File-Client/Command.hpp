@@ -4,8 +4,20 @@
 #include <string>
 #include <map>
 
+
 //-------------------------For the user-------------------------
 
+
+/* How to make a command: 
+ * 
+ * 1) Create a class representing your command.
+ *
+ * 2) Said class must define: static void execute(const std::string&);
+ *
+ * 3) In the class' cpp file run ADD_COMMAND(<Your class>), replacing
+ *    <Your class> with the name of your class (without quotes)
+ *
+ */
 
 //Call this inside a command's cpp file
 //to register the command as a usable command
@@ -46,7 +58,8 @@ namespace CommandMap {
 	 * arbiturary order, it is possible an element may be 
 	 * added to m before m is constructed. Thus we used
 	 * staticBuiltM which is initalized earlier and build
-	 * m from that early on in main.cpp */
+	 * m from that early on in main.cpp 
+	 */
 
 	//The map that links command names to their execution functions
 	extern std::map<std::string, execType> m;
